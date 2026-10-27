@@ -21,7 +21,18 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install streamlit scikit-learn
+        pip install -r requirements.txt
+
+    - name: Run regression tests
+      run: |
+        python -m pytest
+
+    - name: Upload test report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-report
+        path: reports/test_report.txt
 
     - name: Run basic test
       run: |
